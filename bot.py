@@ -2,18 +2,7 @@
 # pylint: disable=unused-argument
 # This program is dedicated to the public domain under the CC0 license.
 
-"""
-Simple Bot to reply to Telegram messages.
 
-First, a few handler functions are defined. Then, those functions are passed to
-the Application and registered at their respective places.
-Then, the bot is started and runs until we press Ctrl-C on the command line.
-
-Usage:
-Basic Echobot example, repeats messages.
-Press Ctrl-C on the command line or send a signal to the process to stop the
-bot.
-"""
 MYTOKEN = "7279938443:AAEtnngk3-sVJi5S4GqS5f2b76zq5kmPvss"
 INTERVAL_MINUTE = 5
 
@@ -58,12 +47,12 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await update.message.reply_text("Help!")
 
 async def log_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
-    argsProvided = False
+    argsProvided = False # we can check whether the user provided us with a time
+    # as an input or not
     try:
         args = context.args[0]
         argsProvided = True
-    catch IndexError:
+    except IndexError:
         argsProvided = False
     
     print(f'args: {args}')
@@ -73,7 +62,6 @@ async def log_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     temperature_exists = os.path.isfile(f"../data/temperature/{current_time}.txt")
     print(f"moisture_exists: {moisture_exists}\ntemperature_exists: {temperature_exists}")
 
-    
     final_string = ""
 
     if moisture_exists:
